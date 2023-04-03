@@ -1,0 +1,98 @@
+from flask_login import current_user, login_required
+
+from flask import Blueprint, flash, redirect, render_template, request, url_for
+
+from . import db
+from .models import NPC
+
+modules = Blueprint('modules', __name__)
+
+@modules.route("/character_creator", methods=['GET', 'POST'])
+@login_required
+def cc():
+    return render_template("character_creator.html", user=current_user)
+
+@modules.route("/npc_generator", methods=['GET', 'POST'])
+@login_required
+def npc_generator():
+    if request.method == 'POST':
+        name = request.form.get('name')
+        race = request.form.get('race')
+        play_class = request.form.get('play_class')
+        level = request.form.get('level', type=int)
+        alignment = request.form.get('alignment')
+        strength = request.form.get('strength', type=int)
+        dexterity = request.form.get('dexterity', type=int)
+        constitution = request.form.get('constitution', type=int)
+        intelligence = request.form.get('intelligence', type=int)
+        wisdom = request.form.get('wisdom', type=int)
+        charisma = request.form.get('charisma', type=int)
+        hp = request.form.get('hp', type=int)
+        ac = request.form.get('ac', type=int)
+        perception = request.form.get('perception', type=int)
+        personality = request.form.get('personality')
+        physical_description = request.form.get('physical_description')
+        if len(name) < 1:
+            flash('Name must be at least 1 character long', category='error')
+        elif level < 1:
+            flash('Level must be at least 1', category='error')
+        elif strength < 1:
+            flash('Strength must be at least 1', category='error')
+        elif strength > 30:
+            flash('Strength can\'t be greater than 30', category='error')
+        elif dexterity < 1:
+            flash('Dexterity must be at least 1', category='error')
+        elif dexterity > 30:
+            flash('Dexterity can\'t be greater than 30', category='error')
+        elif constitution < 1:
+            flash('Constitution must be at least 1', category='error')
+        elif constitution > 30:
+            flash('Constitution can\'t be greater than 30', category='error')
+        elif intelligence < 1:
+            flash('Intelligence must be at least 1', category='error')
+        elif intelligence > 30:
+            flash('Intelligence can\'t be greater than 30', category='error')
+        elif wisdom < 1:
+            flash('Wisdom must be at least 1', category='error')
+        elif wisdom > 30:
+            flash('Wisdom can\'t be greater than 30', category='error')
+        elif charisma < 1:
+            flash('Charisma must be at least 1', category='error')
+        elif charisma > 30:
+            flash('Charisma can\'t be greater than 30', category='error')
+        elif hp < 1:
+            flash('HP must be at least 1', category='error')
+        elif ac < 1:
+            flash('AC must be at least 1', category='error')
+        elif perception < 1:
+            flash('Perception must be at least 1', category='error')
+        elif len(personality) < 1:
+            flash('Must include personality', category='error')
+        elif len(physical_description) < 1:
+            flash('Must include a physical description', category='error')
+        else:
+            new_npc = NPC(name=name, race=race, play_class=play_class, level=level, alignment=alignment, strength=strength, dexterity=dexterity, constitution=constitution, intelligence=intelligence, wisdom=wisdom, charisma=charisma, hp=hp, ac=ac, perception=perception, personality=personality, physical_description=physical_description, user_id=current_user.id)
+            db.session.add(new_npc)
+            db.session.commit()
+            return redirect(url_for('modules.npc_generator'))
+    return render_template("npc_generator.html", user=current_user)
+
+@modules.route("/market_generator")
+@login_required
+def m_gen():
+    return render_template("market_generator.html", user=current_user)
+
+@modules.route("/dice_roller")
+@login_required
+def dice():
+    return render_template("dice_roller.html", user=current_user)
+
+@modules.route("/notes")
+@login_required
+def notes():
+    return render_template("notes.html", user=current_user)
+
+@modules.route("/quests")
+@login_required
+def quests():
+    return render_template("quests.html", user=current_user)

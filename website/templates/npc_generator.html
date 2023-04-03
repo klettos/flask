@@ -1,0 +1,321 @@
+{% extends "layout.html" %} {% block title %}
+<title>NPC Generator</title>
+{%endblock %} {% block override_content %}
+<div class="row">
+	<div
+		class="container col-6"
+		id="page_content"
+		style="border: 2px solid #76323f; border-radius: 5px"
+	>
+		<form
+			method="POST"
+			action=""
+		>
+			<h3 align="center">NPC Generator</h3>
+			<div class="form-group row">
+				<div class="col">
+					<label for="name">Name</label>
+					<input
+						type="text"
+						class="form-control"
+						id="name"
+						name="name"
+						placeholder="Enter name"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="race">Race</label>
+					<select
+						class="form-select form-control"
+						name="race"
+						id="race"
+						required="True"
+					>
+						<option value="aarakocra">Aarakocra</option>
+						<option value="aasimar">Aasimar</option>
+						<option value="bugbear">Bugbear</option>
+						<option value="centaur">Centaur</option>
+						<option value="changeling">Changeling</option>
+						<option value="dragonborn">Dragonborn</option>
+						<option value="dwarf">Dwarf</option>
+						<option value="elf">Elf</option>
+						<option value="firbolg">Firbolg</option>
+						<option value="genasi">Genasi</option>
+						<option value="gith">Gith</option>
+						<option value="gnome">Gnome</option>
+						<option value="goblin">Goblin</option>
+						<option value="goliath">Goliath</option>
+						<option value="halfling">Halfling</option>
+						<option value="half-elf">Half-Elf</option>
+						<option value="half-orc">Half-Orc</option>
+						<option value="hobgoblin">Hobgoblin</option>
+						<option value="human">Human</option>
+						<option value="kalashtar">Kalashtar</option>
+						<option value="kenku">Kenku</option>
+						<option value="kobold">Kobold</option>
+						<option value="leonin">Leonin</option>
+						<option value="lizardfolk">Lizardfolk</option>
+						<option value="loxodon">Loxodon</option>
+						<option value="minotaur">Minotaur</option>
+						<option value="orc">Orc</option>
+						<option value="shifter">Shifter</option>
+						<option value="simic-hybrid">Simic Hybrid</option>
+						<option value="tabaxi">Tabaxi</option>
+						<option value="tiefling">Tiefling</option>
+						<option value="tortle">Tortle</option>
+						<option value="triton">Triton</option>
+						<option value="warforged">Warforged</option>
+						<option value="yuan-ti-pureblood">Yuan-Ti Pureblood</option>
+					</select>
+				</div>
+				<div class="col">
+					<label for="play_class">Class</label>
+					<select
+						class="form-select form-control"
+						name="play_class"
+						id="play_class"
+						required="True"
+					>
+						<option value="barbarian">Barbarian</option>
+						<option value="bard">Bard</option>
+						<option value="cleric">Cleric</option>
+						<option value="druid">Druid</option>
+						<option value="fighter">Fighter</option>
+						<option value="monk">Monk</option>
+						<option value="paladin">Paladin</option>
+						<option value="ranger">Ranger</option>
+						<option value="rogue">Rogue</option>
+						<option value="sorcerer">Sorcerer</option>
+						<option value="warlock">Warlock</option>
+						<option value="wizard">Wizard</option>
+						<option value="monster">Monster</option>
+						<option value="none">None</option>
+					</select>
+				</div>
+				<div class="col">
+					<label for="level">Level</label>
+					<input
+						type="number"
+						class="form-control"
+						id="level"
+						name="level"
+						placeholder="Enter level"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="alignment">Alignment</label>
+					<select
+						class="form-select form-control"
+						name="alignment"
+						id="alignment"
+						required="True"
+					>
+						<option value="lg">Lawful Good</option>
+						<option value="ln">Lawful Neutral</option>
+						<option value="le">Lawful Evil</option>
+						<option value="ng">Neutral Good</option>
+						<option value="nn">True Neutral</option>
+						<option value="ne">Neutral Evil</option>
+						<option value="cg">Chaotic Good</option>
+						<option value="cn">Chaotic Neutral</option>
+						<option value="ce">Chaotic Evil</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col">
+					<label for="strength">Strength</label>
+					<input
+						type="number"
+						class="form-control"
+						id="strength"
+						name="strength"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="dexterity">Dexterity</label>
+					<input
+						type="number"
+						class="form-control"
+						id="dexterity"
+						name="dexterity"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="constitution">Constitution</label>
+					<input
+						type="number"
+						class="form-control"
+						id="constitution"
+						name="constitution"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="intelligence">Intelligence</label>
+					<input
+						type="number"
+						class="form-control"
+						id="intelligence"
+						name="intelligence"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="wisdom">Wisdom</label>
+					<input
+						type="number"
+						class="form-control"
+						id="wisdom"
+						name="wisdom"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="charisma">Charisma</label>
+					<input
+						type="number"
+						class="form-control"
+						id="charisma"
+						name="charisma"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+			</div>
+			<div class="form-group row">
+				<div class="col">
+					<label for="hp">Hit Points</label>
+					<input
+						type="number"
+						class="form-control"
+						id="hp"
+						name="hp"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="ac">Armor Class</label>
+					<input
+						type="number"
+						class="form-control"
+						id="ac"
+						name="ac"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+				<div class="col">
+					<label for="perception">Perception</label>
+					<input
+						type="number"
+						class="form-control"
+						id="perception"
+						name="perception"
+						placeholder="10"
+						required="True"
+					/>
+				</div>
+			</div>
+			<br />
+			<div class="form-group row">
+				<div class="col">
+					<label for="personality">Personality</label>
+					<textarea
+						class="form-control"
+						id="personality"
+						name="personality"
+						rows="3"
+						required="True"
+					></textarea>
+				</div>
+			</div>
+			<br />
+			<div class="form-group row">
+				<div class="col">
+					<label for="physical_description">Physical Description</label>
+					<textarea
+						class="form-control"
+						id="physical_description"
+						name="physical_description"
+						rows="3"
+						required="True"
+					></textarea>
+				</div>
+			</div>
+			<br />
+			<div class="form-group row row-cols-auto">
+				<div class="col">
+					<button
+						type="submit"
+						class="btn btn-primary"
+					>
+						Save
+					</button>
+				</div>
+				<div class="col">
+					<button
+						type="reset"
+						class="btn btn-primary"
+						id="load_npc"
+					>
+						Reset
+					</button>
+				</div>
+				<div class="col">
+					<button
+						type="button"
+						class="btn btn-primary"
+						id="randomize_npc"
+					>
+						Randomize
+					</button>
+					<br />
+				</div>
+			</div>
+		</form>
+	</div>
+	<div
+		class="container col-4"
+		id="npc_sidebar"
+		style="border: 2px solid #76323f; border-radius: 5px"
+	>
+		<h3 align="center">NPCs</h3>
+		<ul
+			class="list-group list-group-flush"
+			id="npcs"
+		>
+			{% for npc in user.npcs %}
+			<li class="list-group-item">
+				<button
+					type="button"
+					class="close btn"
+					onClick="deleteNote({{ npc.id }})"
+				>
+					<i class="bi bi-x-circle-fill"></i>
+				</button>
+				<button
+					type="button"
+					class="btn btn-primary"
+					onClick=""
+				>
+					Load
+				</button>
+				{{ npc.name }}
+			</li>
+			<br />
+			{% endfor %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
