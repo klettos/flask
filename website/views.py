@@ -16,6 +16,7 @@ def home():
     return render_template("index.html", user=current_user)
 
 @views.route("/view_npc")
+@login_required
 def view_npc():
     return render_template("view_npc.html", user=current_user)
 
