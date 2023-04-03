@@ -86,7 +86,8 @@ a:hover {
 	margin-bottom: 50px;
 }
 
-#npc_sidebar {
+#npc_sidebar,
+#character_sidebar {
 	background-color: #c09f80;
 	border-color: #565656;
 	margin-top: 50px;
