@@ -29,6 +29,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     npcs = db.relationship('NPC')
+    characters = db.relationship('Character')
 
 class Character(db.Model):
     id = db.Column(db.Integer, primary_key=True)

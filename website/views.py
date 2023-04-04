@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 from flask import Blueprint, flash, jsonify, render_template, request
 
 from . import db
-from .models import NPC
+from .models import NPC, Character
 
 views = Blueprint('views', __name__)
 
@@ -32,6 +32,18 @@ def delete_npc():
     if npc:
         if npc.user_id == current_user.id:
             db.session.delete(npc)
+            db.session.commit()
+
+    return jsonify({})
+
+@views.route("/delete_character", methods=['POST'])
+def delete_character():
+    character = json.loads(request.data) # this function expects a JSON from the npc_generator.js file 
+    characterId = character['characterId']
+    character = Character.query.get(characterId)
+    if character:
+        if character.user_id == current_user.id:
+            db.session.delete(character)
             db.session.commit()
 
     return jsonify({})

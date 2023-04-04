@@ -1,4 +1,4 @@
-function deleteNote(npcId) {
+function deleteNPC(npcId) {
 	fetch('/delete_npc', {
 		method: 'POST',
 		body: JSON.stringify({ npcId }),
