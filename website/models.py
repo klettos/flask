@@ -30,6 +30,8 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String(150))
     npcs = db.relationship('NPC')
     characters = db.relationship('Character')
+    notes = db.relationship('Note')
+    quests = db.relationship('Quest')
 
 class Character(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -65,3 +67,17 @@ class Character(db.Model):
     spell3 = db.Column(db.String(150))
     spell4 = db.Column(db.String(150))
     spell5 = db.Column(db.String(150))
+
+class Note(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    data = db.Column(db.String(10000))
+
+class Quest(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    data = db.Column(db.String(10000))
+    players_told = db.Column(db.Boolean)
+    is_active = db.Column(db.Boolean)
+    is_complete = db.Column(db.Boolean)
+
