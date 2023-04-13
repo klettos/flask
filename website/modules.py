@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from flask import Blueprint, flash, redirect, render_template, request, url_for
 
 from . import db
-from .models import NPC, Character, Note, Quest
+from .models import NPC, Character, Note
 
 modules = Blueprint('modules', __name__)
 
@@ -176,21 +176,3 @@ def notes():
             db.session.add(new_note)
             db.session.commit()
     return render_template("notes.html", user=current_user)
-
-@modules.route("/quests", methods=['GET', 'POST'])
-@login_required
-def quests():
-    if request.method == 'POST':
-        quest = request.form.get('quest')
-        players_told = False
-        is_active = False
-        is_complete = False
-
-        if len(quest) < 1:
-            flash('Must input a quest to save', category='error')
-        else:
-
-            new_quest = Quest(data=quest, players_told = players_told, is_active=is_active, is_complete=is_complete, user_id=current_user.id)
-            db.session.add(new_quest)
-            db.session.commit()
-    return render_template("quests.html", user=current_user)

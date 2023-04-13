@@ -24,12 +24,3 @@ function deleteNote(noteId) {
 		window.location.href = '/notes';
 	});
 }
-
-function deleteQuest(questId) {
-	fetch('/delete-quest', {
-		method: 'POST',
-		body: JSON.stringify({ questId: questId }),
-	}).then((_res) => {
-		window.location.href = '/quests';
-	});
-}

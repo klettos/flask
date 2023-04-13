@@ -31,7 +31,6 @@ class User(db.Model, UserMixin):
     npcs = db.relationship('NPC')
     characters = db.relationship('Character')
     notes = db.relationship('Note')
-    quests = db.relationship('Quest')
 
 class Character(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -73,11 +72,15 @@ class Note(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     data = db.Column(db.String(10000))
 
-class Quest(db.Model):
+class Shop(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    data = db.Column(db.String(10000))
-    players_told = db.Column(db.Boolean)
-    is_active = db.Column(db.Boolean)
-    is_complete = db.Column(db.Boolean)
+    shop_type = db.Column(db.String(50))
+    items = db.relationship('ShopItem')
 
+class ShopItem(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    name = db.Column(db.String(150))
+    item_type = db.Column(db.String(50))
+    stats = db.Column(db.String(10))
+    shop_id = db.Column(db.Integer, db.ForeignKey('shop.id'))
