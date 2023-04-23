@@ -1,3 +1,160 @@
 {% extends "layout.html" %} {% block title %}
 <title>Dice Roller</title>
-{%endblock %} {% block page_content %} {% endblock %}
+{%endblock %} {% block page_content %}
+<div class="container">
+	<h1>Dice Roller</h1>
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D4</div>
+				<div class="card-body wide-card-body">
+					<label for="d4-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d4-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d4')"
+					>
+						Roll
+					</button>
+					<div id="d4-results"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D6</div>
+				<div class="card-body wide-card-body">
+					<label for="d6-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d6-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d6')"
+					>
+						Roll
+					</button>
+					<div id="d6-results"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D8</div>
+				<div class="card-body wide-card-body">
+					<label for="d8-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d8-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d8')"
+					>
+						Roll
+					</button>
+					<div id="d8-results"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D10</div>
+				<div class="card-body wide-card-body">
+					<label for="d10-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d10-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d10')"
+					>
+						Roll
+					</button>
+					<div id="d10-results"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D12</div>
+				<div class="card-body wide-card-body">
+					<label for="d12-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d12-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d12')"
+					>
+						Roll
+					</button>
+					<div id="d12-results"></div>
+				</div>
+			</div>
+		</div>
+		<div class="col-lg-4">
+			<div class="card">
+				<div class="card-header">D20</div>
+				<div class="card-body wide-card-body">
+					<label for="d20-rolls">Rolls:</label>
+					<input
+						type="number"
+						id="d20-rolls"
+						min="1"
+						max="100"
+						value="1"
+					/>
+					<button
+						class="btn btn-primary"
+						onclick="rollDice('d20')"
+					>
+						Roll
+					</button>
+					<div id="d20-results"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+	function rollDice(dice) {
+		var rolls = parseInt(document.getElementById(dice + '-rolls').value);
+		var results = '';
+		var total = 0;
+		for (var i = 0; i < rolls; i++) {
+			var result = Math.floor(Math.random() * parseInt(dice.slice(1)) + 1);
+			results += '<p>Roll ' + (i + 1) + ': ' + result + '</p>';
+			total += result;
+		}
+		document.getElementById(dice + '-results').innerHTML =
+			results + '<hr><p>Total: ' + total + '</p>';
+	}
+</script>
+{% endblock %}

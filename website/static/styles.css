@@ -11,18 +11,14 @@ a:hover {
 	color: #76323f;
 }
 
-.navbar-nav > .nav-item > a:hover {
-	transition: 0.05s border-radius;
-	border-radius: 15px;
-}
-
-.navbar {
+.navbar,
+.navbar a {
 	background-color: #565656;
+	color: #d7cec7;
 }
 
 .navbar a {
 	display: inline-block;
-	color: #d7cec7;
 	text-align: center;
 	padding: 0px 14px;
 	text-decoration: none;
@@ -34,6 +30,11 @@ a:hover {
 	background-color: #76323f;
 	border-radius: 15px;
 	color: #565656;
+}
+
+.navbar-nav > .nav-item > a:hover {
+	transition: 0.05s border-radius;
+	border-radius: 15px;
 }
 
 .welcome-text {
@@ -79,13 +80,7 @@ a:hover {
 	color: #565656;
 }
 
-#page_content {
-	background-color: #c09f80;
-	border-color: #565656;
-	margin-top: 50px;
-	margin-bottom: 50px;
-}
-
+#page_content,
 #npc_sidebar,
 #character_sidebar {
 	background-color: #c09f80;
@@ -109,4 +104,24 @@ a:hover {
 
 .list-group-item {
 	background-color: #c09f80;
+}
+
+.card-header {
+	background-color: #565656;
+	color: #d7cec7;
+}
+
+.card-body {
+	background-color: #d7cec7;
+	color: #565656;
+	padding: 1rem;
+	margin: 0;
+}
+
+.card {
+	margin-bottom: 1rem;
+}
+
+.wide-card-body {
+	width: 405px;
 }
