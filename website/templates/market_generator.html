@@ -1,12 +1,139 @@
 {% extends "layout.html" %} {% block title %}
 <title>Market Generator</title>
 {%endblock %} {% block page_content %}
-<pre>
-    ██    ██ ███    ██ ██████  ███████ ██████       ██████  ██████  ███    ██ ███████ ████████ ██████  ██    ██  ██████ ████████ ██  ██████  ███    ██ 
-    ██    ██ ████   ██ ██   ██ ██      ██   ██     ██      ██    ██ ████   ██ ██         ██    ██   ██ ██    ██ ██         ██    ██ ██    ██ ████   ██ 
-    ██    ██ ██ ██  ██ ██   ██ █████   ██████      ██      ██    ██ ██ ██  ██ ███████    ██    ██████  ██    ██ ██         ██    ██ ██    ██ ██ ██  ██ 
-    ██    ██ ██  ██ ██ ██   ██ ██      ██   ██     ██      ██    ██ ██  ██ ██      ██    ██    ██   ██ ██    ██ ██         ██    ██ ██    ██ ██  ██ ██ 
-     ██████  ██   ████ ██████  ███████ ██   ██      ██████  ██████  ██   ████ ███████    ██    ██   ██  ██████   ██████    ██    ██  ██████  ██   ████ 
-                                                                                                                                                     
-</pre>
+<h1>Market Generator</h1>
+<p>Select a market theme:</p>
+<button
+	class="btn btn-primary"
+	onclick="generateMarket('armor shop')"
+>
+	Armor Shop
+</button>
+<button
+	class="btn btn-primary"
+	onclick="generateMarket('weapon shop')"
+>
+	Weapon Shop
+</button>
+<button
+	class="btn btn-primary"
+	onclick="generateMarket('potion shop')"
+>
+	Potion Shop
+</button>
+<div id="market"></div>
+
+<script type="text/javascript">
+	// Define the different item types
+	var armor_items = [
+		'leather armor',
+		'studded leather armor',
+		'hide armor',
+		'chain shirt',
+		'scale mail',
+		'breastplate',
+		'half plate armor',
+		'full plate armor',
+		'shield',
+		'ring mail',
+		'chain mail',
+		'splint armor',
+		'plate mail',
+		'mithril shirt',
+		'adamantine breastplate',
+		'dragonscale shield',
+		'adamantine full plate',
+		'elven chain',
+		'dwarven plate',
+		'celestial armor',
+	];
+	var weapon_items = [
+		'dagger',
+		'short sword',
+		'long sword',
+		'greatsword',
+		'scimitar',
+		'rapier',
+		'handaxe',
+		'battleaxe',
+		'warhammer',
+		'greataxe',
+		'shortbow',
+		'longbow',
+		'crossbow',
+		'bolts',
+		'arrows',
+		'spear',
+		'pike',
+		'halberd',
+		'lance',
+		'trident',
+	];
+	var potion_items = [
+		'potion of healing',
+		'potion of greater healing',
+		'potion of fire breath',
+		'potion of water breathing',
+		'potion of resistance',
+		'potion of speed',
+		'potion of flying',
+		'potion of giant strength',
+		'potion of heroism',
+		'potion of invisibility',
+		'potion of vitality',
+		'potion of supreme healing',
+		'potion of stone giant strength',
+		'potion of mind reading',
+		'potion of frost giant strength',
+		'potion of cloud giant strength',
+		'potion of storm giant strength',
+		'potion of gaseous form',
+		'potion of climbing',
+		'potion of animal friendship',
+	];
+
+	// Define a function to generate a random price for an item in gold, silver, and copper pieces
+	function generatePrice() {
+		var gp = Math.floor(Math.random() * 11) + 10; // Random price between 10 and 20 gp
+		var sp = Math.floor(Math.random() * 11) + 10; // Random price between 10 and 20 sp
+		var cp = Math.floor(Math.random() * 11) + 10; // Random price between 10 and 20 cp
+		return [gp, sp, cp];
+	}
+
+	// Define a function to generate a market based on the specified theme
+	function generateMarket(theme) {
+		var items = [];
+		if (theme == 'armor shop') {
+			items = armor_items;
+		} else if (theme == 'weapon shop') {
+			items = weapon_items;
+		} else if (theme == 'potion shop') {
+			items = potion_items;
+		} else {
+			alert('Invalid market theme.');
+			return;
+		}
+
+		var marketHTML =
+			'<h2>Welcome to the ' +
+			theme +
+			'!</h2><p>Here are some items you may be interested in:</p><ul>';
+		for (var i = 0; i < 6; i++) {
+			var item = items[Math.floor(Math.random() * items.length)];
+			var price = generatePrice();
+			marketHTML +=
+				'<li>' +
+				item +
+				' - ' +
+				price[0] +
+				' gp, ' +
+				price[1] +
+				' sp,' +
+				price[2] +
+				' cp</li>';
+		}
+		marketHTML += '</ul><p>Thank you for shopping with us!</p>';
+		document.getElementById('market').innerHTML = marketHTML;
+	}
+</script>
 {% endblock %}
