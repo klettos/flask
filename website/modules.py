@@ -7,6 +7,31 @@ from .models import NPC, Character, Note
 
 modules = Blueprint('modules', __name__)
 
+
+@modules.route("/market_generator")
+@login_required
+def m_gen():
+    return render_template("market_generator.html", user=current_user)
+
+@modules.route("/dice_roller")
+@login_required
+def dice():
+    return render_template("dice_roller.html", user=current_user)
+
+@modules.route("/notes", methods=['GET', 'POST'])
+@login_required
+def notes():
+    if request.method == 'POST':
+        data = request.form.get('note')
+        if len(data) < 1:
+            flash('Must input a note to save', category='error')
+        else:
+
+            new_note = Note(data=data, user_id=current_user.id)
+            db.session.add(new_note)
+            db.session.commit()
+    return render_template("notes.html", user=current_user)
+
 @modules.route("/character_creator", methods=['GET', 'POST'])
 def character_creator():
     if request.method == 'POST':
@@ -107,7 +132,6 @@ def npc_generator():
         personality = request.form.get('personality')
         physical_description = request.form.get('physical_description')
 
-        
         if len(name) < 1:
             flash('Name must be at least 1 character long', category='error')
         elif level < 1:
@@ -152,27 +176,3 @@ def npc_generator():
             db.session.commit()
             return redirect(url_for('modules.npc_generator'))
     return render_template("npc_generator.html", user=current_user)
-
-@modules.route("/market_generator")
-@login_required
-def m_gen():
-    return render_template("market_generator.html", user=current_user)
-
-@modules.route("/dice_roller")
-@login_required
-def dice():
-    return render_template("dice_roller.html", user=current_user)
-
-@modules.route("/notes", methods=['GET', 'POST'])
-@login_required
-def notes():
-    if request.method == 'POST':
-        data = request.form.get('note')
-        if len(data) < 1:
-            flash('Must input a note to save', category='error')
-        else:
-
-            new_note = Note(data=data, user_id=current_user.id)
-            db.session.add(new_note)
-            db.session.commit()
-    return render_template("notes.html", user=current_user)

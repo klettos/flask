@@ -71,16 +71,3 @@ class Note(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     data = db.Column(db.String(10000))
-
-class Shop(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    shop_type = db.Column(db.String(50))
-    items = db.relationship('ShopItem')
-
-class ShopItem(db.Model):
-    id = db.Column(db.Integer, primary_key = True)
-    name = db.Column(db.String(150))
-    item_type = db.Column(db.String(50))
-    stats = db.Column(db.String(10))
-    shop_id = db.Column(db.Integer, db.ForeignKey('shop.id'))
